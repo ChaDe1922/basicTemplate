@@ -16,15 +16,16 @@ class SceneMain extends Phaser.Scene {
     create() {
         //this is where we define objects, like sharks and bubbles, to be used in the game
         
-        var road = new Road({scene:this});
-        road.x = game.config.width/2;
-        road.makeLines();
+        this.road = new Road({scene:this});
+        this.road.x = game.config.width/2;
+        this.road.makeLines();
        
     }
     update() 
     {
         //this is a constant loop. Place things that need to be checked over and over.
         
+        this.road.moveLines();
         
         
     }
