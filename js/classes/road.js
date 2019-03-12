@@ -18,6 +18,42 @@ class Road extends Phaser.GameObjects.Container //collection of grouped objects 
         //
         //
         this.count = 0;
+        
+        //add a car
+        this.car = this.scene.add.sprite(this.displayWidth/4, game.config.height*.9, "cars");
+        this.add(this.car);
+        Align.scaleToGameW(this.car, .10);
+        //
+        //click to switch lanes
+        this.back.setInteractive();
+        this.back.on('pointerdown', this.changeLanes, this);
+        this.addObject();
+    }
+    
+    addObject()
+    {
+        this.object = this.scene.add.sprite(-this.displayWidth/4,0, "pcar1");
+        this.add(this.object);
+        Align.scaleToGameW(this.object, .10);
+        
+        // randomize obstacle lane
+        var lane = Math.random()*100;
+        if (lane<50)
+            {
+                this.object.x = this.displayWidth/4;
+            }
+    }
+    
+    changeLanes()
+    {
+        if (this.car.x > 0)
+            {
+                this.car.x = -this.displayWidth/4;
+            }
+        else
+            {
+               this.car.x = this.displayWidth/4; 
+            }
     }
     
     makeLines()
@@ -32,6 +68,7 @@ class Road extends Phaser.GameObjects.Container //collection of grouped objects 
     }
     
     moveLines()
+    
     {
         this.lineGroup.children.iterate(function(child){
             child.y += this.vSpace/20;
@@ -43,6 +80,16 @@ class Road extends Phaser.GameObjects.Container //collection of grouped objects 
                 this.lineGroup.children.iterate(function(child){
             child.y = child.oy;
         }.bind(this));
+            }
+    }
+    
+    moveObject()
+    {
+        this.object.y+=this.vSpace/20;
+        if (this.object.y>game.config.height)
+            {
+                this.object.destroy();
+                this.addObject();
             }
     }
        
