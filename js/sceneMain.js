@@ -23,6 +23,7 @@ class SceneMain extends Phaser.Scene {
         
         emitter = new Phaser.Events.EventEmitter();  //Communication between game parts
         
+        controller=new Controller();
         this.road = new Road({scene:this});
         this.road.x = game.config.width/2;
         this.road.makeLines();

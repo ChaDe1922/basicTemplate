@@ -2,6 +2,7 @@ var game;
 var model;
 var emitter;
 var G;
+var controller;
 
 window.onload = function ( )
 {
