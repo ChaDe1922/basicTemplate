@@ -1,4 +1,6 @@
 var game;
+var model;
+var emitter;
 
 window.onload = function ( )
 {
@@ -10,6 +12,7 @@ window.onload = function ( )
         scene: [SceneMain]
     };
     
+    model = new Model();
     game = new Phaser.Game(config);
     
 }

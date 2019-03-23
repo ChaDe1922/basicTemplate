@@ -21,9 +21,13 @@ class SceneMain extends Phaser.Scene {
     create() {
         //this is where we define objects, like sharks and bubbles, to be used in the game
         
+        emitter = new Phaser.Events.EventEmitter();  //Communication between game parts
+        
         this.road = new Road({scene:this});
         this.road.x = game.config.width/2;
         this.road.makeLines();
+        model.score = 100;
+         
        
     }
     update() 
