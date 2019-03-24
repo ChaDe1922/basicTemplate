@@ -23,8 +23,6 @@ class SceneMain extends Phaser.Scene {
     create() {
         //this is where we define objects, like sharks and bubbles, to be used in the game
         
-        emitter = new Phaser.Events.EventEmitter();  //Communication between game parts
-        controller=new Controller();
         this.road = new Road({scene:this});
         this.road.x = game.config.width/2;
         this.road.makeLines();
@@ -35,14 +33,22 @@ class SceneMain extends Phaser.Scene {
         model.score = 100;
         
         this.alignGrid = new AlignGrid ({scene:this, rows:5, cols:5});
-        this.alignGrid.showNumbers();
+        //this.alignGrid.showNumbers();
         this.alignGrid.placeAtIndex(4, this.sb);
         
-        var flatButton = new FlatButton ({scene:this, key:'button1', text:'Press Me!', x:240, y:100, event: 'button_pressed'});
+        var flatButton = new FlatButton ({scene:this, key:'button1', text:'Destroy!', x:240, y:100, event: 'button_pressed', params: 'self_destruct'});
         
-        var flatButton2 = new FlatButton ({scene:this, key:'button2', text:'Press Me!', x:240, y:300, event: 'button_pressed'});
-       
+        var flatButton2 = new FlatButton ({scene:this, key:'button2', text:'Fire!', x:240, y:300, event: 'button_pressed', params: 'fire_lasers'});
+        
+        emitter.on('button_pressed', this.buttonPressed, this);
     }
+    
+    buttonPressed(params)
+    {
+        console.log(params);
+        this.scene.start("SceneOver");    //start a new scene upon button press function
+    }
+    
     update() 
     {
         //this is a constant loop. Place things that need to be checked over and over.
