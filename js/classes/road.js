@@ -104,6 +104,7 @@ class Road extends Phaser.GameObjects.Container //collection of grouped objects 
             }
         if (this.object.y>game.config.height)
             {
+                emitter.emit(G.UP_POINTS,1);
                 this.object.destroy();
                 this.addObject();
             }

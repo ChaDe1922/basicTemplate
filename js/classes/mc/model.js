@@ -8,6 +8,7 @@ class Model
         {
             this._score=val;
             console.log("Score updated!");
+            emitter.emit(G.SCORE_UPDATED);
         }
         get score()
         {
